@@ -20,10 +20,20 @@ mongoose.connect(url)
 
 const Course = mongoose.model('Course',courseShema);
 
-const course = new Course({
-  name : 'Node Js Course',
-  author: 'Zakaria kamili',
-  tags:['node','backend'],
-  isPublished:true
-});
+async function createCourse() {
+   const course = new Course({
+      name : 'Node Js Course',
+      author: 'Zakaria kamili',
+      tags:['node','backend'],
+      isPublished:true
+    });
+    
+    const result = await course.save();
+    console.log(result);
+
+}
+
+createCourse();
+
+
 
