@@ -35,7 +35,14 @@ async function createCourse() {
 }
 
 async function getCourses() {
-
+   //eq (equal)
+   //ne (not equal)
+   //gt (greater than)
+   //gte (greater than or equal to)
+   //lt (less than)
+   //lte (less than or equal to)
+   //in 
+   //nin (not in)
    const courses = await Course
                         .find({author:'Zakaria kamili',isPublished:true})
                         .limit(10)
