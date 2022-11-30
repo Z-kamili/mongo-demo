@@ -21,12 +21,13 @@ mongoose.connect(url)
 const Course = mongoose.model('Course',courseShema);
 
 async function createCourse() {
+
    const course = new Course({
-      name : 'Node Js Course',
+      name : 'Angular Course',
       author: 'Zakaria kamili',
-      tags:['node','backend'],
+      tags:['angular','frontend'],
       isPublished:true
-    });
+});
     
     const result = await course.save();
     console.log(result);
