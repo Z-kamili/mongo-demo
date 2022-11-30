@@ -44,8 +44,12 @@ async function getCourses() {
    //in 
    //nin (not in)
    const courses = await Course
+                         // Starts with Zakaria
                         .find({author:/^Zakaria/})
+                        // Ends with Kamili
                         .find({author:/kamili$/})
+                        //Contains Zakaria
+                        .find({author:/.*Zakaria.*/})
                         .limit(10)
                         .sort({name:1})
                         .select({name:1,tags:1});
