@@ -36,7 +36,7 @@ async function createCourse() {
 
 async function getCourses() {
 
-   const courses = await course.find();
+   const courses = await Course.find();
    console.log(courses);
 
 }
