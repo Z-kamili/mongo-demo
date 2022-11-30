@@ -13,3 +13,15 @@ mongoose.connect('mongodb://127.0.0.1/playground')
       isPublished:Boolean
    });
 
+   //Classes,objects
+   //Course,nodeCourse
+
+const Course = mongoose.model('Course',courseShema);
+
+const course = new Course({
+  name : 'Node Js Course',
+  author: 'Zakaria kamili',
+  tags:['node','backend'],
+  isPublished:true
+});
+
