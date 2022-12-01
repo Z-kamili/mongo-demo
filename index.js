@@ -81,22 +81,29 @@ async function getCoursesPaginate() {
 
 async function updateCourse(id) {
 
-   const result = await Course.update({id:id},{
+   const course = await Course.findByIdAndUpdate(id,{
        $set : {
-         author : 'Zakaria',
-         isPublished:false 
+         author : 'Jack',
+         isPublished:true 
        }    
    });
 
-  console.log(result);
+  console.log(course);
 
 }
 
-updateCourse('638746bf655d2d8532c63c84');
+async function removeCourse(id) {
 
-getCourses();
-getCoursesCount();
-getCoursesPaginate();
+ const result = await Course.deleteOne({_id:id});
+ console.log(result);
+
+}
+
+removeCourse('638746bf655d2d8532c63c84');
+
+// getCourses();
+// getCoursesCount();
+// getCoursesPaginate();
 
 
 
