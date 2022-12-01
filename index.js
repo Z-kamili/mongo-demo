@@ -22,10 +22,13 @@ mongoose.connect(url)
       author:String,
       tags:{
           type:Array,
-          validate: function(v) {
+          validate: {
+             isAsync : true,
+             validator : function(v,callback) {
                return v && v.length > 0;
+             },
+             message: 'A course should have at least one tag.'
           },
-          message: 'A course should have at least one tag.'
       },
       date:{type:Date,default:Date.now},
       isPublished:Boolean,
