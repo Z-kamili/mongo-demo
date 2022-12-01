@@ -12,7 +12,11 @@ mongoose.connect(url)
       author:String,
       tags:[String],
       date:{type:Date,default:Date.now},
-      isPublished:Boolean
+      isPublished:Boolean,
+      price : {
+         type : Number,
+         required : function() { return this.isPublished; }
+      } 
    });
 
    //Classes,objects
@@ -31,11 +35,8 @@ async function createCourse() {
 
 
    try {
-
-      await course.validate();
-      // const result = await course.save();
-      // console.log(result);
-
+        const result = await course.save();
+        console.log(result);
    }
    catch (ex) 
    {
