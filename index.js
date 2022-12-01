@@ -20,13 +20,20 @@ mongoose.connect(url)
         enum:['web','mobile','network']
       },
       author:String,
-      tags:[String],
+      tags:{
+          type:Array,
+          validate: function(v) {
+               return v.length > 0;
+          },
+          message: 'A course should have at least one tag.'
+      },
       date:{type:Date,default:Date.now},
       isPublished:Boolean,
       price : {
          type : Number,
          required : () =>  { return this.isPublished; }
-      } 
+      },
+
    });
 
    //Classes,objects
