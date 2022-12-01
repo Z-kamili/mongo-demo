@@ -47,16 +47,54 @@ async function getCourses() {
                          // Starts with Zakaria
                         .find({author:/^Zakaria/})
                         // Ends with Kamili
-                        .find({author:/kamili$/})
+                        .find({author:/kamili$/i})
                         //Contains Zakaria
-                        .find({author:/.*Zakaria.*/})
+                        .find({author:/.*Zakaria.*/i})
                         .limit(10)
                         .sort({name:1})
                         .select({name:1,tags:1});
                      console.log(courses);
 }
 
+
+async function getCoursesCount() {
+   const courses = await Course
+                         // Starts with Zakaria
+                        .find({author:/^Zakaria/,isPublished:true})
+                        .limit(10)
+                        .sort({name:1})
+                        .count();
+                     console.log(courses);
+}
+
+async function getCoursesPaginate() {
+                const pageNumber = 2;
+                const pageSize = 10;
+   const courses = await Course
+                        .find({author:/^Zakaria/,isPublished:true})
+                        .skip((pageNumber - 1) * pageSize)
+                        .limit(10)
+                        .sort({name:1})
+                        .count();
+                     console.log(courses);
+}
+
+async function updateCourse(id) {
+
+   const course = await Course.findById(id);
+   if(!course) return ;
+   course.isPublished = true;
+   course.author = 'Another Author';
+   const result = await course.save();
+   console.log(result);
+
+}
+
+updateCourse('638746bf655d2d8532c63c84');
+
 getCourses();
+getCoursesCount();
+getCoursesPaginate();
 
 
 
