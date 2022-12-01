@@ -81,12 +81,14 @@ async function getCoursesPaginate() {
 
 async function updateCourse(id) {
 
-   const course = await Course.findById(id);
-   if(!course) return ;
-   course.isPublished = true;
-   course.author = 'Another Author';
-   const result = await course.save();
-   console.log(result);
+   const result = await Course.update({id:id},{
+       $set : {
+         author : 'Zakaria',
+         isPublished:false 
+       }    
+   });
+
+  console.log(result);
 
 }
 
