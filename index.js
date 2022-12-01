@@ -23,7 +23,7 @@ mongoose.connect(url)
       tags:{
           type:Array,
           validate: function(v) {
-               return v.length > 0;
+               return v && v.length > 0;
           },
           message: 'A course should have at least one tag.'
       },
