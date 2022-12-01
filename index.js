@@ -28,9 +28,20 @@ async function createCourse() {
       tags:['angular','frontend'],
       isPublished:true
    });
+
+
+   try {
+
+      const result = await course.save();
+      console.log(result);
+
+   }
+   catch (ex) 
+   {
+        console.log(ex.message);
+   }
     
-    const result = await course.save();
-    console.log(result);
+
 
 }
 
