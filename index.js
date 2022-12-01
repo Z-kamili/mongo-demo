@@ -8,7 +8,7 @@ mongoose.connect(url)
 
 
    const courseShema = new mongoose.Schema({
-      name:String,
+      name: {type:String,required:true},
       author:String,
       tags:[String],
       date:{type:Date,default:Date.now},
@@ -23,11 +23,11 @@ const Course = mongoose.model('Course',courseShema);
 async function createCourse() {
 
    const course = new Course({
-      name : 'Angular Course',
+      // name : 'Angular Course',
       author: 'Zakaria kamili',
       tags:['angular','frontend'],
       isPublished:true
-});
+   });
     
     const result = await course.save();
     console.log(result);
@@ -99,7 +99,9 @@ async function removeCourse(id) {
 
 }
 
-removeCourse('638746bf655d2d8532c63c84');
+createCourse();
+
+// removeCourse('638746bf655d2d8532c63c84');
 
 // getCourses();
 // getCoursesCount();
