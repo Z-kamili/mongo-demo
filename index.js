@@ -17,7 +17,10 @@ mongoose.connect(url)
       category : {
         type:String,
         required:true,
-        enum:['web','mobile','network']
+        enum:['web','mobile','network'],
+        lowercase:true,
+        //upercase : true,
+        trim:true,
       },
       author:String,
       tags:{
@@ -25,7 +28,10 @@ mongoose.connect(url)
           validate: {
              isAsync : true,
              validator : function(v,callback) {
-               return v && v.length > 0;
+               setTimeout(() => {
+               // Do some async work.
+               const result = v && v.length > 0;
+               }, 4000);
              },
              message: 'A course should have at least one tag.'
           },
@@ -34,9 +40,12 @@ mongoose.connect(url)
       isPublished:Boolean,
       price : {
          type : Number,
-         required : () =>  { return this.isPublished; }
+         required : () =>  { return this.isPublished; },
+         min : 10,
+         max : 200,
+         get: v => Math.round(v),
+         set: v => Math.round(v)
       },
-
    });
 
    //Classes,objects
@@ -48,20 +57,22 @@ async function createCourse() {
 
    const course = new Course({
       name : 'Angular Course',
-      category:'-',
+      category:'web',
       author: 'Zakaria kamili',
       tags:['angular','frontend'],
       isPublished:true
    });
 
 
-   try {
+   try 
+   {
         const result = await course.save();
         console.log(result);
    }
    catch (ex) 
    {
-        console.log(ex.message);
+      for(field in ex.errors)
+         console.log(ex.errors[field]);
    }
     
 
